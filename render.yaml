@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: codezone-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: codezone-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CODEZONE_ALLOWED_ORIGINS
+        value: https://codezone-business-management.onrender.com
+
+  - type: web
+    name: codezone-frontend
+    runtime: static
+    plan: free
+    buildCommand: ""
+    staticPublishPath: desktop/frontend
+
+databases:
+  - name: codezone-db
+    plan: free

@@ -1,0 +1,186 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CODEZONE Business Management</title><meta name="theme-color" content="#0f6b4c"><link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="style.css"></head><body>
+<div id="root">
+<div id="toast"></div>
+<div id="login" class="center"><div class="card auth"><h1>CODEZONE</h1><p>Business Management Platform</p><form id="loginForm"><input id="loginEmail" type="email" placeholder="Email" required><input id="loginPassword" type="password" placeholder="Password" required><button>Sign in</button></form><button class="link" onclick="showSetup()">First time? Set up business</button></div></div>
+<div id="setup" class="center hidden"><div class="card auth auth-wide"><h1>Set up your business</h1><p>Choose the business profile that best fits your operations. You can change it later.</p><form id="setupForm"><div class="formgrid"><input id="bizName" placeholder="Business name" required><select id="industryProfile" required><option value="">Choose business type</option></select></div><input id="ownerName" placeholder="Owner / administrator name" required><div class="formgrid"><input id="ownerEmail" type="email" placeholder="Owner email" required><input id="ownerPhone" placeholder="Business phone"></div><input id="ownerAddress" placeholder="Business address"><div class="formgrid"><input id="ownerTin" placeholder="TIN (optional)"><input id="ownerVat" placeholder="VAT number (optional)"></div><div class="formgrid"><input id="ownerCurrency" placeholder="Currency" value="TZS" required><input id="ownerPassword" type="password" placeholder="Password (8+ characters)" minlength="8" required></div><button>Create business & owner account</button></form><button class="link" onclick="showLogin()">Back to sign in</button></div></div>
+<div id="app" class="app-shell hidden">
+  <aside id="sidebar" class="sidebar" aria-label="Primary navigation">
+    <div class="sidebar-header">
+      <div class="brand-row">
+        <div class="brand-mark" aria-hidden="true">CZ</div>
+        <div class="brand-copy"><strong>CODEZONE</strong><span>Business Management</span></div>
+      </div>
+      <div class="industry-chip" id="industryChip">RETAIL SHOP</div>
+    </div>
+
+    <nav id="mainNav" class="sidebar-nav" aria-label="Main navigation">
+      <button class="nav-item" data-page="dashboard" data-tooltip="Home"><span class="nav-icon" aria-hidden="true">🏠</span><span class="nav-label">Home</span></button>
+      <button class="nav-item" data-page="sales" data-tooltip="Sell"><span class="nav-icon" aria-hidden="true">🛒</span><span class="nav-label">Sell</span></button>
+
+      <div class="nav-group" data-group="orders">
+        <button class="nav-group-toggle" type="button" data-tooltip="Orders" title="Orders" aria-expanded="false"><span class="nav-icon" aria-hidden="true">📋</span><span class="nav-label">Orders</span><span class="nav-chevron" aria-hidden="true">⌄</span></button>
+        <div class="nav-group-panel"><div class="nav-group-items">
+          <button data-page="orders" data-nav-group="sales" data-tooltip="Orders & Quotes"><span class="nav-label">Orders & Quotes</span></button>
+          <button data-page="deliveries" data-nav-group="admin" data-tooltip="Deliveries"><span class="nav-label">Deliveries</span></button>
+          <button data-page="operations" data-nav-group="inventory" data-tooltip="Returns & Adjustments"><span class="nav-label">Returns & Adjustments</span></button>
+        </div></div>
+      </div>
+
+      <div class="nav-group" data-group="products">
+        <button class="nav-group-toggle" type="button" data-tooltip="Products" title="Products" aria-expanded="false"><span class="nav-icon" aria-hidden="true">📦</span><span class="nav-label">Products</span><span class="nav-chevron" aria-hidden="true">⌄</span></button>
+        <div class="nav-group-panel"><div class="nav-group-items">
+          <button data-page="products" data-nav-group="inventory" data-tooltip="Products & Stock"><span class="nav-label">Products & Stock</span></button>
+          <button data-page="pricing" data-nav-group="sales" data-tooltip="Price Lists"><span class="nav-label">Price Lists</span></button>
+          <button data-page="services" data-nav-group="admin" data-tooltip="Services"><span class="nav-label">Services</span></button>
+          <button data-page="production" data-nav-group="admin" data-tooltip="Production"><span class="nav-label">Production</span></button>
+        </div></div>
+      </div>
+
+      <div class="nav-group" data-group="stock">
+        <button class="nav-group-toggle" type="button" data-tooltip="Stock" title="Stock" aria-expanded="false"><span class="nav-icon" aria-hidden="true">🏭</span><span class="nav-label">Stock</span><span class="nav-chevron" aria-hidden="true">⌄</span></button>
+        <div class="nav-group-panel"><div class="nav-group-items">
+          <button data-page="products" data-nav-group="inventory" data-tooltip="Stock levels"><span class="nav-label">Stock levels</span></button>
+          <button data-page="locations" data-nav-group="inventory" data-tooltip="Branches & Warehouses"><span class="nav-label">Branches & Warehouses</span></button>
+          <button data-page="operations" data-nav-group="inventory" data-tooltip="Adjustments"><span class="nav-label">Adjustments</span></button>
+        </div></div>
+      </div>
+
+      <div class="nav-group" data-group="purchasing">
+        <button class="nav-group-toggle" type="button" data-tooltip="Purchasing" title="Purchasing" aria-expanded="false"><span class="nav-icon" aria-hidden="true">🚚</span><span class="nav-label">Purchasing</span><span class="nav-chevron" aria-hidden="true">⌄</span></button>
+        <div class="nav-group-panel"><div class="nav-group-items">
+          <button data-page="purchases" data-nav-group="purchasing" data-tooltip="Purchase orders"><span class="nav-label">Purchase orders</span></button>
+          <button data-page="suppliers" data-nav-group="purchasing" data-tooltip="Suppliers"><span class="nav-label">Suppliers</span></button>
+        </div></div>
+      </div>
+
+      <button class="nav-item" data-page="customers" data-nav-group="customers" data-tooltip="Customers"><span class="nav-icon" aria-hidden="true">👥</span><span class="nav-label">Customers</span></button>
+      <div class="nav-group" data-group="people">
+        <button class="nav-group-toggle" type="button" data-tooltip="People" title="People" aria-expanded="false"><span class="nav-icon" aria-hidden="true">👤</span><span class="nav-label">People</span><span class="nav-chevron" aria-hidden="true">⌄</span></button>
+        <div class="nav-group-panel"><div class="nav-group-items">
+          <button data-page="employees" data-nav-group="admin" data-tooltip="Employees"><span class="nav-label">Employees</span></button>
+          <button data-page="users" data-nav-group="admin" data-tooltip="Users & Roles"><span class="nav-label">Users & Roles</span></button>
+          <button data-page="email" data-nav-group="admin" data-tooltip="Company Email"><span class="nav-label">Company Email</span></button>
+        </div></div>
+      </div>
+      <button class="nav-item" data-page="debts" data-nav-group="admin" data-tooltip="Debts & Payments"><span class="nav-icon" aria-hidden="true">💰</span><span class="nav-label">Debts & Payments</span></button>
+      <button class="nav-item" data-page="messages" data-nav-group="admin" data-tooltip="Messages"><span class="nav-icon" aria-hidden="true">💬</span><span class="nav-label">Messages</span><span id="messagesBadge" class="count-badge hidden">0</span></button>
+
+      <div class="nav-group" data-group="money">
+        <button class="nav-group-toggle" type="button" data-tooltip="Money" title="Money" aria-expanded="false"><span class="nav-icon" aria-hidden="true">💳</span><span class="nav-label">Money</span><span class="nav-chevron" aria-hidden="true">⌄</span></button>
+        <div class="nav-group-panel"><div class="nav-group-items">
+          <button data-page="expenses" data-nav-group="finance" data-tooltip="Expenses"><span class="nav-label">Expenses</span></button>
+          <button data-page="banks" data-nav-group="finance" data-tooltip="Cash & Bank"><span class="nav-label">Cash & Bank</span></button>
+          <button data-page="shift" data-nav-group="finance" data-tooltip="Shifts"><span class="nav-label">Shifts</span></button>
+        </div></div>
+      </div>
+
+      <button class="nav-item" data-page="approvals" data-nav-group="admin" data-tooltip="Approvals"><span class="nav-icon" aria-hidden="true">✅</span><span class="nav-label">Approvals</span><span id="approvalsBadge" class="count-badge hidden">0</span></button>
+
+      <div class="nav-group" data-group="reports">
+        <button class="nav-group-toggle" type="button" data-tooltip="Reports" title="Reports" aria-expanded="false"><span class="nav-icon" aria-hidden="true">📊</span><span class="nav-label">Reports</span><span class="nav-chevron" aria-hidden="true">⌄</span></button>
+        <div class="nav-group-panel"><div class="nav-group-items">
+          <button data-page="reports" data-nav-group="reports" data-tooltip="Reports & Analytics"><span class="nav-label">Reports & Analytics</span></button>
+          <button data-page="notifications" data-nav-group="admin" data-tooltip="Notifications"><span class="nav-label">Notifications</span></button>
+        </div></div>
+      </div>
+
+      <div class="nav-group" data-group="settings">
+        <button class="nav-group-toggle" type="button" data-tooltip="Settings" title="Settings" aria-expanded="false"><span class="nav-icon" aria-hidden="true">⚙️</span><span class="nav-label">Settings</span><span class="nav-chevron" aria-hidden="true">⌄</span></button>
+        <div class="nav-group-panel"><div class="nav-group-items">
+          <button data-page="settings" data-nav-group="admin" data-tooltip="Settings"><span class="nav-label">Settings</span></button>
+          <button data-page="enterprise" data-nav-group="admin" data-tooltip="Enterprise"><span class="nav-label">Enterprise</span></button>
+          <button data-page="industry" data-nav-group="admin" data-tooltip="Industry & Platform"><span class="nav-label">Industry & Platform</span></button>
+          <button data-page="cloud" data-nav-group="admin" data-tooltip="Cloud & Sync"><span class="nav-label">Cloud & Sync</span></button>
+        </div></div>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="userbox">
+        <div class="user-meta">
+          <div class="avatar" id="userAvatar">DC</div>
+          <div class="user-copy"><strong id="userName"></strong><small id="userRole"></small></div>
+        </div>
+        <button class="signout-btn" onclick="logout()" title="Sign out" aria-label="Sign out">↪</button>
+      </div>
+    </div>
+  </aside>
+  <div id="sidebarOverlay" class="sidebar-overlay" aria-hidden="true"></div>
+  <main class="main-column">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button id="sidebarToggle" class="hamburger" type="button" aria-label="Toggle sidebar" title="Toggle sidebar"><span></span><span></span><span></span></button>
+        <div class="page-context">
+          <div class="breadcrumb" id="pageCrumb">Home</div>
+          <div class="page-title-row"><h2 id="pageTitle">Dashboard</h2><button class="title-refresh" onclick="refreshPage()" aria-label="Refresh page" title="Refresh page">↻</button></div>
+        </div>
+      </div>
+      <div class="topbar-center">
+        <div class="global-search-wrap">
+          <span class="global-search-icon" aria-hidden="true">⌕</span>
+          <input id="globalSearch" class="global-search" autocomplete="off" placeholder="Search pages, products, customers..." aria-label="Global search">
+          <kbd>Ctrl K</kbd>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="status-pill shift-pill" id="shiftHeader" type="button"><span class="shift-dot" aria-hidden="true"></span><span id="shiftHeaderText">Shift closed</span></button>
+        <select id="branchSelector" class="branch-selector" aria-label="Select branch" title="Branch"></select>
+        <button id="quickCreateBtn" class="create-btn" type="button"><span>＋</span> Create</button>
+        <button id="userMenuBtn" class="user-menu-btn" type="button" aria-haspopup="menu" aria-expanded="false" title="Account menu"><span class="avatar mini-avatar" id="topUserAvatar">DC</span><span class="user-menu-name" id="topUserName">Account</span><span class="user-menu-chevron">⌄</span></button>
+      </div>
+    </header>
+    <section id="content" class="main-content"></section>
+  </main>
+
+  <div id="quickCreateMenu" class="quick-create-menu hidden" role="menu" aria-label="Create">
+    <div class="quick-menu-head"><strong>Create</strong><button type="button" id="closeQuickCreate" aria-label="Close">×</button></div>
+    <button type="button" data-quick-page="sales"><span>＋</span><div><strong>New sale</strong><small>Open POS and start a transaction</small></div></button>
+    <button type="button" data-quick-page="orders"><span>▤</span><div><strong>Quote</strong><small>Create a quotation or sales order</small></div></button>
+    <button type="button" data-quick-page="expenses"><span>−</span><div><strong>Expense</strong><small>Record a business expense</small></div></button>
+    <button type="button" data-quick-page="purchases"><span>↗</span><div><strong>Purchase</strong><small>Create a purchase order</small></div></button>
+  </div>
+
+  <div id="userMenu" class="user-menu hidden" role="menu" aria-label="Account menu">
+    <div class="user-menu-head"><span class="avatar" id="menuUserAvatar">DC</span><div><strong id="menuUserName">Account</strong><small id="menuUserRole">owner</small></div></div>
+    <button type="button" data-user-action="settings">Settings</button>
+    <button type="button" data-user-action="logout">Sign out</button>
+  </div>
+
+  <div id="commandPalette" class="command-overlay hidden" role="dialog" aria-modal="true" aria-label="CODEZONE command palette">
+    <div class="command-palette">
+      <div class="command-head"><div><strong>Quick navigation</strong><span>Search anything you can open in CODEZONE</span></div><button id="closeCommandPalette" type="button" aria-label="Close">×</button></div>
+      <input id="commandInput" class="command-input" autocomplete="off" placeholder="Search modules, pages, products or customers...">
+      <div id="commandResults" class="command-results"></div>
+      <div class="command-foot"><span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>Enter</kbd> open</span><span><kbd>Esc</kbd> close</span></div>
+    </div>
+  </div>
+
+  <button id="aiFab" class="ai-fab" type="button" aria-label="Open CODEZONE AI" title="Ask CODEZONE AI">✦</button>
+  <aside id="aiPanel" class="ai-panel" aria-label="CODEZONE AI" aria-hidden="true">
+    <div class="ai-header">
+      <div class="ai-title"><div class="ai-spark">✦</div><div><strong>CODEZONE AI Advisor</strong><small id="aiStatus">Verified business context</small></div></div>
+      <div class="ai-head-actions"><button id="aiClear" class="ai-close" type="button" aria-label="New conversation" title="New conversation">↺</button><button id="aiClose" class="ai-close" type="button" aria-label="Close AI">×</button></div>
+    </div>
+    <div class="ai-toolbar">
+      <label>Language<select id="aiLanguage"><option value="auto">Auto</option><option value="sw">Kiswahili</option><option value="en">English</option></select></label>
+      <div class="ai-toolbar-actions"><button id="aiAnalyzePage" class="ai-mini-action" type="button">Analyze this page</button><button id="aiConfigure" class="ai-mini-action hidden" type="button">Configure AI</button><span id="aiMode" class="ai-mode-pill">Advisor</span></div>
+    </div>
+    <div id="aiInsights" class="ai-insights"></div>
+    <div id="aiChat" class="ai-chat">
+      <div class="ai-welcome"><strong>Ask for a decision, not just a number.</strong><span>I can explain verified CODEZONE data, identify risks, and recommend practical next steps in Kiswahili or English.</span></div>
+    </div>
+    <div class="ai-suggestions" id="aiSuggestions">
+      <button type="button">Nipe ushauri wa biashara wa leo</button>
+      <button type="button">How can I improve profit?</button>
+      <button type="button">Nionyeshe risks kubwa za biashara</button>
+      <button type="button">What should I reorder first?</button>
+    </div>
+    <form id="aiForm" class="ai-form">
+      <input id="aiInput" autocomplete="off" placeholder="Uliza CODEZONE AI / Ask CODEZONE AI...">
+      <button type="submit" aria-label="Send">➤</button>
+    </form>
+    <div class="ai-footnote">Advice is grounded in verified business data available to your account. AI does not replace professional legal, tax or financial advice.</div>
+  </aside>
+</div>
+<script src="config.js"></script>
+<script src="app.js"></script><script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}</script></body></html>

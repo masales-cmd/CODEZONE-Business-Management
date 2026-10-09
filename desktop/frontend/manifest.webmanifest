@@ -1,0 +1,10 @@
+{
+  "name": "CODEZONE Business Management",
+  "short_name": "CODEZONE",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#103d2e",
+  "theme_color": "#0f6b4c",
+  "description": "General business management platform for sales, inventory, customers and finance.",
+  "icons": []
+}
